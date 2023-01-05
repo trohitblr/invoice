@@ -1,0 +1,162 @@
+<div>
+  <h2 id="page-heading" data-cy="RetailerUserHeading">
+    <span>Retailer Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-retailer-user"
+        [routerLink]="['/retailer-user/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Retailer User </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="retailerUsers?.length === 0">
+    <span>No Retailer Users found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="retailerUsers && retailerUsers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="retailerUserId">
+            <div class="d-flex">
+              <span>Retailer User Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="userId">
+            <div class="d-flex">
+              <span>User Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="phone">
+            <div class="d-flex">
+              <span>Phone</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span>Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="type">
+            <div class="d-flex">
+              <span>Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="encPassword">
+            <div class="d-flex">
+              <span>Enc Password</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span>Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdOn">
+            <div class="d-flex">
+              <span>Created On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedOn">
+            <div class="d-flex">
+              <span>Updated On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <div class="d-flex">
+              <span>Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedBy">
+            <div class="d-flex">
+              <span>Updated By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="retailers.retailerId">
+            <div class="d-flex">
+              <span>Retailers</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let retailerUser of retailerUsers; trackBy: trackRetailerUserId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/retailer-user', retailerUser.retailerUserId, 'view']">{{ retailerUser.retailerUserId }}</a>
+          </td>
+          <td>{{ retailerUser.userId }}</td>
+          <td>{{ retailerUser.phone }}</td>
+          <td>{{ retailerUser.email }}</td>
+          <td>{{ retailerUser.type }}</td>
+          <td>{{ retailerUser.encPassword }}</td>
+          <td>{{ retailerUser.status }}</td>
+          <td>{{ retailerUser.createdOn | formatMediumDatetime }}</td>
+          <td>{{ retailerUser.updatedOn | formatMediumDatetime }}</td>
+          <td>{{ retailerUser.createdBy }}</td>
+          <td>{{ retailerUser.updatedBy }}</td>
+          <td>
+            <div *ngIf="retailerUser.retailers">
+              <a [routerLink]="['/retailer', retailerUser.retailers.retailerId, 'view']">{{ retailerUser.retailers.retailerId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/retailer-user', retailerUser.retailerUserId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/retailer-user', retailerUser.retailerUserId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(retailerUser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

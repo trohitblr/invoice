@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="retailInventory">
+      <h2 data-cy="retailInventoryDetailsHeading"><span>Retail Inventory</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Retail Inventory Id</span></dt>
+        <dd>
+          <span>{{ retailInventory.retailInventoryId }}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+          <span>{{ retailInventory.quantity }}</span>
+        </dd>
+        <dt><span>Available Qty</span></dt>
+        <dd>
+          <span>{{ retailInventory.availableQty }}</span>
+        </dd>
+        <dt><span>Sold Qty</span></dt>
+        <dd>
+          <span>{{ retailInventory.soldQty }}</span>
+        </dd>
+        <dt><span>Max Limit</span></dt>
+        <dd>
+          <span>{{ retailInventory.maxLimit }}</span>
+        </dd>
+        <dt><span>Min Limit</span></dt>
+        <dd>
+          <span>{{ retailInventory.minLimit }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ retailInventory.status }}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+          <span>{{ retailInventory.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated On</span></dt>
+        <dd>
+          <span>{{ retailInventory.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ retailInventory.createdBy }}</span>
+        </dd>
+        <dt><span>Updated By</span></dt>
+        <dd>
+          <span>{{ retailInventory.updatedBy }}</span>
+        </dd>
+        <dt><span>Catalougs</span></dt>
+        <dd>
+          <div *ngIf="retailInventory.catalougs">
+            <a [routerLink]="['/retailer', retailInventory.catalougs.retailerId, 'view']">{{ retailInventory.catalougs.retailerId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/retail-inventory', retailInventory.retailInventoryId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

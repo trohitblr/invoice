@@ -1,0 +1,76 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062404",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "catalouge",
+  "fields": [
+    {
+      "fieldName": "catalougeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cost",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "hsnNo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Catalouge",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "categories",
+      "otherEntityRelationshipName": "catalouge",
+      "relationshipName": "categorie",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "gstSlave",
+      "otherEntityRelationshipName": "catalouge",
+      "relationshipName": "taxSlaves",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

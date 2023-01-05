@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-media-heading" data-cy="MediaCreateUpdateHeading">Create or edit a Media</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.mediaId.value !== null">
+          <label class="form-label" for="field_mediaId">Media Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="mediaId"
+            id="field_mediaId"
+            data-cy="mediaId"
+            formControlName="mediaId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_path">Path</label>
+          <input type="text" class="form-control" name="path" id="field_path" data-cy="path" formControlName="path" />
+          <div *ngIf="editForm.get('path')!.invalid && (editForm.get('path')!.dirty || editForm.get('path')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('path')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let mediaType of mediaTypeValues" [value]="mediaType">mediaType</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

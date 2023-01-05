@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="catalouge">
+      <h2 data-cy="catalougeDetailsHeading"><span>Catalouge</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Catalouge Id</span></dt>
+        <dd>
+          <span>{{ catalouge.catalougeId }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ catalouge.name }}</span>
+        </dd>
+        <dt><span>Cost</span></dt>
+        <dd>
+          <span>{{ catalouge.cost }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ catalouge.status }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ catalouge.description }}</span>
+        </dd>
+        <dt><span>Hsn No</span></dt>
+        <dd>
+          <span>{{ catalouge.hsnNo }}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+          <span>{{ catalouge.quantity }}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+          <span>{{ catalouge.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated On</span></dt>
+        <dd>
+          <span>{{ catalouge.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ catalouge.createdBy }}</span>
+        </dd>
+        <dt><span>Updated By</span></dt>
+        <dd>
+          <span>{{ catalouge.updatedBy }}</span>
+        </dd>
+        <dt><span>Categorie</span></dt>
+        <dd>
+          <div *ngIf="catalouge.categorie">
+            <a [routerLink]="['/categories', catalouge.categorie.categoryId, 'view']">{{ catalouge.categorie.categoryId }}</a>
+          </div>
+        </dd>
+        <dt><span>Tax Slaves</span></dt>
+        <dd>
+          <div *ngIf="catalouge.taxSlaves">
+            <a [routerLink]="['/gst-slave', catalouge.taxSlaves.gstSlaveId, 'view']">{{ catalouge.taxSlaves.gstSlaveId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/catalouge', catalouge.catalougeId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

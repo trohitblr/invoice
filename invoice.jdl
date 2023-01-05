@@ -1,0 +1,240 @@
+
+entity Retailer {
+    @Id retailerId Long
+	name String required
+    owner String
+    phone Integer min(10) max(10)
+    email String pattern(/^(.+)@(\\S+)$/)
+    gstNumber String
+    status Status
+  CreatedOn Instant
+  UpdatedOn Instant
+  CreatedBy String
+  UpdatedBy String
+}
+
+
+entity Address {
+	line1 String,
+    line2 String,
+    city String,
+    state String,
+    pincode Long,
+    lat Float,
+    lon Float,
+    country String,
+    landmark String
+    shippingAddress Boolean
+    billingAddress Boolean
+    homeAddress Boolean
+    officeAddress Boolean
+    CreatedOn Instant
+    UpdatedOn Instant
+    CreatedBy String
+    UpdatedBy String
+}
+
+relationship OneToOne {
+	Retailer{invoiceAddress} to Address
+}
+
+relationship OneToOne {
+	Retailer{billingAddress} to Address
+}
+
+enum Status{
+ACTIVE(Active), INACTIVE(InActive)
+}
+
+
+entity Media{
+@Id mediaId Long
+path String required
+type MediaType
+}
+
+enum MediaType{
+PNG(png),JEPG(jpeg)
+}
+
+entity Customer {
+    @Id customerId Long
+	name String
+    email String pattern(/^(.+)@(\\S+)$/)
+    phone Integer required min(10) max(10)
+    CreatedOn Instant
+    UpdatedOn Instant
+    CreatedBy String
+    UpdatedBy String
+}
+
+relationship OneToOne {
+	Customer{invoiceAddress} to Address
+}
+
+relationship OneToOne {
+	Customer{billingAddress} to Address
+}
+
+entity Invoice {
+@Id invoiceId Long
+billNo String
+taxPercentage String
+paymentType PaymentType
+CreatedOn Instant
+UpdatedOn Instant
+CreatedBy String
+UpdatedBy String
+}
+
+relationship OneToMany {
+	Retailer{invoice} to Invoice{retailers}
+}
+
+enum PaymentType{
+ NEFT(neft), UPI(upi), CASH (cash), CREDIT(credit), DEBIT(debit)
+}
+
+entity RetailerUser{
+@Id retailerUserId Long
+userId String
+phone Long
+email String
+type UserType
+encPassword String
+status Boolean
+CreatedOn Instant
+UpdatedOn Instant
+CreatedBy String
+UpdatedBy String
+}
+
+enum UserType {
+    OWNER(owner),ADMIN(admin), BILLING (billing), AGENT(agent)
+}
+
+entity InvoiceLineItem {
+@Id invoiceLineItemId Long
+articleType ArticleType
+articleId String
+quantity Long
+amount Integer
+discount Float
+CreatedOn Instant
+UpdatedOn Instant
+CreatedBy String
+UpdatedBy String
+}
+
+
+enum ArticleType {
+  GNG(gng),AIR(air)
+}
+
+entity InvoiceGStLineItem{
+@Id invoiceGStLineItemId Long
+articleType ArticleType
+articleId String
+hsnsac String
+sgst Float
+cgst Float
+sgstTaxAmount Float
+cgstTaxAmount Float
+amount Float
+discount Float
+CreatedOn Instant
+UpdatedOn Instant
+CreatedBy String
+UpdatedBy String
+}
+
+@service(serviceClass)
+entity Catalouge{
+@Id catalougeId Long
+name String
+cost Float
+status Boolean
+description String
+hsnNo Long
+quantity Integer
+CreatedOn Instant
+UpdatedOn Instant
+CreatedBy String
+UpdatedBy String
+}
+
+
+entity Categories{
+@Id categoryId Long
+categoryName String
+description String
+CreatedOn Instant
+UpdatedOn Instant
+CreatedBy String
+UpdatedBy String
+}
+
+relationship OneToMany {
+    Categories to Catalouge{categorie}
+}
+
+entity GstSlave{
+@Id gstSlaveId Long
+tax GstType
+taxPercentage Float
+}
+
+enum GstType{
+    CGSTSGST(gst),OTHER(other)
+}
+
+relationship OneToMany {
+    GstSlave to Catalouge{taxSlaves}
+}
+
+entity RetailInventory{
+@Id retailInventoryId Long
+quantity Integer
+availableQty Integer
+soldQty Integer
+maxLimit Integer
+minLimit Integer
+status Boolean
+CreatedOn Instant
+UpdatedOn Instant
+CreatedBy String
+UpdatedBy String
+}
+
+relationship OneToMany {
+	Retailer to RetailerUser{retailers}
+}
+
+relationship OneToMany {
+	Retailer to RetailInventory{Catalougs}
+}
+
+relationship OneToOne {
+	Retailer{logo} to Media
+}
+
+relationship OneToMany {
+	Retailer to Invoice{retailers}
+}
+
+relationship OneToMany {
+	Invoice to InvoiceLineItem{invoices}
+}
+
+relationship OneToMany {
+	Invoice to InvoiceGStLineItem{invoices}
+}
+
+relationship ManyToMany {
+	Retailer{customers} to Customer{retailers}
+}
+
+
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

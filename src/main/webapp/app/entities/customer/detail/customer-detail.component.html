@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="customer">
+      <h2 data-cy="customerDetailsHeading"><span>Customer</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Customer Id</span></dt>
+        <dd>
+          <span>{{ customer.customerId }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ customer.name }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ customer.email }}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+          <span>{{ customer.phone }}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+          <span>{{ customer.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated On</span></dt>
+        <dd>
+          <span>{{ customer.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ customer.createdBy }}</span>
+        </dd>
+        <dt><span>Updated By</span></dt>
+        <dd>
+          <span>{{ customer.updatedBy }}</span>
+        </dd>
+        <dt><span>Invoice Address</span></dt>
+        <dd>
+          <div *ngIf="customer.invoiceAddress">
+            <a [routerLink]="['/address', customer.invoiceAddress.id, 'view']">{{ customer.invoiceAddress.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Billing Address</span></dt>
+        <dd>
+          <div *ngIf="customer.billingAddress">
+            <a [routerLink]="['/address', customer.billingAddress.id, 'view']">{{ customer.billingAddress.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/customer', customer.customerId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Catalouge.
+    -->
+    <changeSet id="20230103062404-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="categorie_category_id"
+                                 baseTableName="catalouge"
+                                 constraintName="fk_catalouge__categorie_id"
+                                 referencedColumnNames="category_id"
+                                 referencedTableName="categories"/>
+
+        <addForeignKeyConstraint baseColumnNames="tax_slaves_gst_slave_id"
+                                 baseTableName="catalouge"
+                                 constraintName="fk_catalouge__tax_slaves_id"
+                                 referencedColumnNames="gst_slave_id"
+                                 referencedTableName="gst_slave"/>
+    </changeSet>
+</databaseChangeLog>

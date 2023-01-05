@@ -1,0 +1,71 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062400",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "invoice",
+  "fields": [
+    {
+      "fieldName": "invoiceId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "billNo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "taxPercentage",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paymentType",
+      "fieldType": "PaymentType",
+      "fieldValues": "NEFT (neft),UPI (upi),CASH (cash),CREDIT (credit),DEBIT (debit)"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Invoice",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "invoiceLineItem",
+      "otherEntityRelationshipName": "invoices",
+      "relationshipName": "invoiceLineItem",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "invoiceGStLineItem",
+      "otherEntityRelationshipName": "invoices",
+      "relationshipName": "invoiceGStLineItem",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "retailer",
+      "otherEntityRelationshipName": "invoice",
+      "relationshipName": "retailers",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

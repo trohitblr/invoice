@@ -1,0 +1,196 @@
+<div>
+  <h2 id="page-heading" data-cy="RetailerHeading">
+    <span>Retailers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-retailer"
+        [routerLink]="['/retailer/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Retailer </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="retailers?.length === 0">
+    <span>No Retailers found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="retailers && retailers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="retailerId">
+            <div class="d-flex">
+              <span>Retailer Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span>Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="owner">
+            <div class="d-flex">
+              <span>Owner</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="phone">
+            <div class="d-flex">
+              <span>Phone</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span>Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="gstNumber">
+            <div class="d-flex">
+              <span>Gst Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span>Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdOn">
+            <div class="d-flex">
+              <span>Created On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedOn">
+            <div class="d-flex">
+              <span>Updated On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <div class="d-flex">
+              <span>Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedBy">
+            <div class="d-flex">
+              <span>Updated By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="invoiceAddress.id">
+            <div class="d-flex">
+              <span>Invoice Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="billingAddress.id">
+            <div class="d-flex">
+              <span>Billing Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="logo.mediaId">
+            <div class="d-flex">
+              <span>Logo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="customers.customerId">
+            <div class="d-flex">
+              <span>Customers</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let retailer of retailers; trackBy: trackRetailerId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/retailer', retailer.retailerId, 'view']">{{ retailer.retailerId }}</a>
+          </td>
+          <td>{{ retailer.name }}</td>
+          <td>{{ retailer.owner }}</td>
+          <td>{{ retailer.phone }}</td>
+          <td>{{ retailer.email }}</td>
+          <td>{{ retailer.gstNumber }}</td>
+          <td>{{ retailer.status }}</td>
+          <td>{{ retailer.createdOn | formatMediumDatetime }}</td>
+          <td>{{ retailer.updatedOn | formatMediumDatetime }}</td>
+          <td>{{ retailer.createdBy }}</td>
+          <td>{{ retailer.updatedBy }}</td>
+          <td>
+            <div *ngIf="retailer.invoiceAddress">
+              <a [routerLink]="['/address', retailer.invoiceAddress.id, 'view']">{{ retailer.invoiceAddress.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="retailer.billingAddress">
+              <a [routerLink]="['/address', retailer.billingAddress.id, 'view']">{{ retailer.billingAddress.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="retailer.logo">
+              <a [routerLink]="['/media', retailer.logo.mediaId, 'view']">{{ retailer.logo.mediaId }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let customers of retailer.customers; let last = last">
+              <a class="form-control-static" [routerLink]="['/customer', customers.customerId, 'view']">{{ customers.customerId }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/retailer', retailer.retailerId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/retailer', retailer.retailerId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(retailer)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

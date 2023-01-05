@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="categories">
+      <h2 data-cy="categoriesDetailsHeading"><span>Categories</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Category Id</span></dt>
+        <dd>
+          <span>{{ categories.categoryId }}</span>
+        </dd>
+        <dt><span>Category Name</span></dt>
+        <dd>
+          <span>{{ categories.categoryName }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ categories.description }}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+          <span>{{ categories.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated On</span></dt>
+        <dd>
+          <span>{{ categories.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ categories.createdBy }}</span>
+        </dd>
+        <dt><span>Updated By</span></dt>
+        <dd>
+          <span>{{ categories.updatedBy }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/categories', categories.categoryId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

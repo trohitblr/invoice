@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Retailer.
+    -->
+    <changeSet id="20230103062356-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="invoice_address_id"
+                                 baseTableName="retailer"
+                                 constraintName="fk_retailer__invoice_address_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="address"/>
+
+        <addForeignKeyConstraint baseColumnNames="billing_address_id"
+                                 baseTableName="retailer"
+                                 constraintName="fk_retailer__billing_address_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="address"/>
+
+        <addForeignKeyConstraint baseColumnNames="logo_media_id"
+                                 baseTableName="retailer"
+                                 constraintName="fk_retailer__logo_id"
+                                 referencedColumnNames="media_id"
+                                 referencedTableName="media"/>
+
+        <addForeignKeyConstraint baseColumnNames="retailer_retailer_id"
+                                 baseTableName="rel_retailer__customers"
+                                 constraintName="fk_rel_retailer__customers__retailer_id"
+                                 referencedColumnNames="retailer_id"
+                                 referencedTableName="retailer"/>
+
+        <addForeignKeyConstraint baseColumnNames="customers_customer_id"
+                                 baseTableName="rel_retailer__customers"
+                                 constraintName="fk_rel_retailer__customers__customers_id"
+                                 referencedColumnNames="customer_id"
+                                 referencedTableName="customer"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,84 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062357",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "address",
+  "fields": [
+    {
+      "fieldName": "line1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "line2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pincode",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "lat",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "lon",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "country",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "landmark",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shippingAddress",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "billingAddress",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "homeAddress",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "officeAddress",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Address",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

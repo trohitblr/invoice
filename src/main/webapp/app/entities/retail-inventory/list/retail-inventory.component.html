@@ -1,0 +1,162 @@
+<div>
+  <h2 id="page-heading" data-cy="RetailInventoryHeading">
+    <span>Retail Inventories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-retail-inventory"
+        [routerLink]="['/retail-inventory/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Retail Inventory </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="retailInventories?.length === 0">
+    <span>No Retail Inventories found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="retailInventories && retailInventories.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="retailInventoryId">
+            <div class="d-flex">
+              <span>Retail Inventory Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="quantity">
+            <div class="d-flex">
+              <span>Quantity</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="availableQty">
+            <div class="d-flex">
+              <span>Available Qty</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="soldQty">
+            <div class="d-flex">
+              <span>Sold Qty</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="maxLimit">
+            <div class="d-flex">
+              <span>Max Limit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="minLimit">
+            <div class="d-flex">
+              <span>Min Limit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span>Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdOn">
+            <div class="d-flex">
+              <span>Created On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedOn">
+            <div class="d-flex">
+              <span>Updated On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <div class="d-flex">
+              <span>Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedBy">
+            <div class="d-flex">
+              <span>Updated By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="catalougs.retailerId">
+            <div class="d-flex">
+              <span>Catalougs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let retailInventory of retailInventories; trackBy: trackRetailInventoryId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/retail-inventory', retailInventory.retailInventoryId, 'view']">{{ retailInventory.retailInventoryId }}</a>
+          </td>
+          <td>{{ retailInventory.quantity }}</td>
+          <td>{{ retailInventory.availableQty }}</td>
+          <td>{{ retailInventory.soldQty }}</td>
+          <td>{{ retailInventory.maxLimit }}</td>
+          <td>{{ retailInventory.minLimit }}</td>
+          <td>{{ retailInventory.status }}</td>
+          <td>{{ retailInventory.createdOn | formatMediumDatetime }}</td>
+          <td>{{ retailInventory.updatedOn | formatMediumDatetime }}</td>
+          <td>{{ retailInventory.createdBy }}</td>
+          <td>{{ retailInventory.updatedBy }}</td>
+          <td>
+            <div *ngIf="retailInventory.catalougs">
+              <a [routerLink]="['/retailer', retailInventory.catalougs.retailerId, 'view']">{{ retailInventory.catalougs.retailerId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/retail-inventory', retailInventory.retailInventoryId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/retail-inventory', retailInventory.retailInventoryId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(retailInventory)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

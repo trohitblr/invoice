@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="invoiceLineItem">
+      <h2 data-cy="invoiceLineItemDetailsHeading"><span>Invoice Line Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Invoice Line Item Id</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.invoiceLineItemId }}</span>
+        </dd>
+        <dt><span>Article Type</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.articleType }}</span>
+        </dd>
+        <dt><span>Article Id</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.articleId }}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.quantity }}</span>
+        </dd>
+        <dt><span>Amount</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.amount }}</span>
+        </dd>
+        <dt><span>Discount</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.discount }}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated On</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.createdBy }}</span>
+        </dd>
+        <dt><span>Updated By</span></dt>
+        <dd>
+          <span>{{ invoiceLineItem.updatedBy }}</span>
+        </dd>
+        <dt><span>Invoices</span></dt>
+        <dd>
+          <div *ngIf="invoiceLineItem.invoices">
+            <a [routerLink]="['/invoice', invoiceLineItem.invoices.invoiceId, 'view']">{{ invoiceLineItem.invoices.invoiceId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/invoice-line-item', invoiceLineItem.invoiceLineItemId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

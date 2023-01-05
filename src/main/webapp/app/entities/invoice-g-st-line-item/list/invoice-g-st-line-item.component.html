@@ -1,0 +1,185 @@
+<div>
+  <h2 id="page-heading" data-cy="InvoiceGStLineItemHeading">
+    <span>Invoice G St Line Items</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-invoice-g-st-line-item"
+        [routerLink]="['/invoice-g-st-line-item/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Invoice G St Line Item </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="invoiceGStLineItems?.length === 0">
+    <span>No Invoice G St Line Items found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="invoiceGStLineItems && invoiceGStLineItems.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="invoiceGStLineItemId">
+            <div class="d-flex">
+              <span>Invoice G St Line Item Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="articleType">
+            <div class="d-flex">
+              <span>Article Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="articleId">
+            <div class="d-flex">
+              <span>Article Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="hsnsac">
+            <div class="d-flex">
+              <span>Hsnsac</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sgst">
+            <div class="d-flex">
+              <span>Sgst</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cgst">
+            <div class="d-flex">
+              <span>Cgst</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sgstTaxAmount">
+            <div class="d-flex">
+              <span>Sgst Tax Amount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cgstTaxAmount">
+            <div class="d-flex">
+              <span>Cgst Tax Amount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="amount">
+            <div class="d-flex">
+              <span>Amount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="discount">
+            <div class="d-flex">
+              <span>Discount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdOn">
+            <div class="d-flex">
+              <span>Created On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedOn">
+            <div class="d-flex">
+              <span>Updated On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <div class="d-flex">
+              <span>Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedBy">
+            <div class="d-flex">
+              <span>Updated By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="invoices.invoiceId">
+            <div class="d-flex">
+              <span>Invoices</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoiceGStLineItem of invoiceGStLineItems; trackBy: trackInvoiceGStLineItemId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/invoice-g-st-line-item', invoiceGStLineItem.invoiceGStLineItemId, 'view']">{{
+              invoiceGStLineItem.invoiceGStLineItemId
+            }}</a>
+          </td>
+          <td>{{ invoiceGStLineItem.articleType }}</td>
+          <td>{{ invoiceGStLineItem.articleId }}</td>
+          <td>{{ invoiceGStLineItem.hsnsac }}</td>
+          <td>{{ invoiceGStLineItem.sgst }}</td>
+          <td>{{ invoiceGStLineItem.cgst }}</td>
+          <td>{{ invoiceGStLineItem.sgstTaxAmount }}</td>
+          <td>{{ invoiceGStLineItem.cgstTaxAmount }}</td>
+          <td>{{ invoiceGStLineItem.amount }}</td>
+          <td>{{ invoiceGStLineItem.discount }}</td>
+          <td>{{ invoiceGStLineItem.createdOn | formatMediumDatetime }}</td>
+          <td>{{ invoiceGStLineItem.updatedOn | formatMediumDatetime }}</td>
+          <td>{{ invoiceGStLineItem.createdBy }}</td>
+          <td>{{ invoiceGStLineItem.updatedBy }}</td>
+          <td>
+            <div *ngIf="invoiceGStLineItem.invoices">
+              <a [routerLink]="['/invoice', invoiceGStLineItem.invoices.invoiceId, 'view']">{{ invoiceGStLineItem.invoices.invoiceId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/invoice-g-st-line-item', invoiceGStLineItem.invoiceGStLineItemId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/invoice-g-st-line-item', invoiceGStLineItem.invoiceGStLineItemId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(invoiceGStLineItem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062356",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "retailer",
+  "fields": [
+    {
+      "fieldName": "retailerId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "owner",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "10",
+      "fieldValidateRulesMin": "10"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^(.+)@(\\\\S+)$"
+    },
+    {
+      "fieldName": "gstNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "ACTIVE (Active),INACTIVE (InActive)"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Retailer",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "address",
+      "ownerSide": true,
+      "relationshipName": "invoiceAddress",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "address",
+      "ownerSide": true,
+      "relationshipName": "billingAddress",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "media",
+      "ownerSide": true,
+      "relationshipName": "logo",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "invoice",
+      "otherEntityRelationshipName": "retailers",
+      "relationshipName": "invoice",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "retailerUser",
+      "otherEntityRelationshipName": "retailers",
+      "relationshipName": "retailerUser",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "retailInventory",
+      "otherEntityRelationshipName": "catalougs",
+      "relationshipName": "retailInventory",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "retailers",
+      "ownerSide": true,
+      "relationshipName": "customers",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

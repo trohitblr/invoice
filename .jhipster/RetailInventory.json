@@ -1,0 +1,70 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062407",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "retail_inventory",
+  "fields": [
+    {
+      "fieldName": "retailInventoryId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "availableQty",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "soldQty",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maxLimit",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "minLimit",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "RetailInventory",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "retailer",
+      "otherEntityRelationshipName": "retailInventory",
+      "relationshipName": "catalougs",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

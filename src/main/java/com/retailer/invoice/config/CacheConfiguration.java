@@ -48,6 +48,27 @@ public class CacheConfiguration {
             createCache(cm, com.retailer.invoice.domain.User.class.getName());
             createCache(cm, com.retailer.invoice.domain.Authority.class.getName());
             createCache(cm, com.retailer.invoice.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.retailer.invoice.domain.Retailer.class.getName());
+            createCache(cm, com.retailer.invoice.domain.Retailer.class.getName() + ".invoices");
+            createCache(cm, com.retailer.invoice.domain.Retailer.class.getName() + ".retailerUsers");
+            createCache(cm, com.retailer.invoice.domain.Retailer.class.getName() + ".retailInventories");
+            createCache(cm, com.retailer.invoice.domain.Retailer.class.getName() + ".customers");
+            createCache(cm, com.retailer.invoice.domain.Address.class.getName());
+            createCache(cm, com.retailer.invoice.domain.Media.class.getName());
+            createCache(cm, com.retailer.invoice.domain.Customer.class.getName());
+            createCache(cm, com.retailer.invoice.domain.Customer.class.getName() + ".retailers");
+            createCache(cm, com.retailer.invoice.domain.Invoice.class.getName());
+            createCache(cm, com.retailer.invoice.domain.Invoice.class.getName() + ".invoiceLineItems");
+            createCache(cm, com.retailer.invoice.domain.Invoice.class.getName() + ".invoiceGStLineItems");
+            createCache(cm, com.retailer.invoice.domain.RetailerUser.class.getName());
+            createCache(cm, com.retailer.invoice.domain.InvoiceLineItem.class.getName());
+            createCache(cm, com.retailer.invoice.domain.InvoiceGStLineItem.class.getName());
+            createCache(cm, com.retailer.invoice.domain.Catalouge.class.getName());
+            createCache(cm, com.retailer.invoice.domain.Categories.class.getName());
+            createCache(cm, com.retailer.invoice.domain.Categories.class.getName() + ".catalouges");
+            createCache(cm, com.retailer.invoice.domain.GstSlave.class.getName());
+            createCache(cm, com.retailer.invoice.domain.GstSlave.class.getName() + ".catalouges");
+            createCache(cm, com.retailer.invoice.domain.RetailInventory.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

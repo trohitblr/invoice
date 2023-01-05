@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062406",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "gst_slave",
+  "fields": [
+    {
+      "fieldName": "gstSlaveId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "tax",
+      "fieldType": "GstType",
+      "fieldValues": "CGSTSGST (gst),OTHER (other)"
+    },
+    {
+      "fieldName": "taxPercentage",
+      "fieldType": "Float"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "GstSlave",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "catalouge",
+      "otherEntityRelationshipName": "taxSlaves",
+      "relationshipName": "catalouge",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

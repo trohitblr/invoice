@@ -1,0 +1,11 @@
+retail_inventory_id;quantity;available_qty;sold_qty;max_limit;min_limit;status;created_on;updated_on;created_by;updated_by
+1;53792;2283;7940;461;31308;true;2023-01-02T11:32:21;2023-01-02T16:19:48;User-friendly;Oklahoma productivity
+2;2811;8226;59132;92410;22821;false;2023-01-02T09:07:24;2023-01-02T13:00:34;program Money;Stand-alone Sleek Fully-configurable
+3;94648;94221;36026;60853;39485;false;2023-01-02T12:50:10;2023-01-03T03:44:14;cross-media;array Clothing
+4;96558;11094;71745;16947;41513;false;2023-01-02T23:51:02;2023-01-02T14:44:42;up Investment;Integrated
+5;75692;62708;24240;57245;38371;true;2023-01-02T21:50:30;2023-01-02T13:23:47;Venezuela incubate;Barthelemy application
+6;8364;7013;72711;76286;3901;false;2023-01-02T14:50:17;2023-01-02T18:58:54;Street Coordinator;THX
+7;83288;86381;19676;12687;62910;false;2023-01-03T01:19:48;2023-01-02T23:41:26;Grocery bleeding-edge;Group deposit indexing
+8;49282;58008;22178;41857;89447;true;2023-01-02T18:40:19;2023-01-03T04:53:54;Metal Developer online;connecting Bacon
+9;48632;82933;20107;72821;49422;true;2023-01-03T03:19:50;2023-01-02T20:35:19;District Mali;Corporate
+10;42007;77838;28051;27719;39776;true;2023-01-02T23:59:36;2023-01-03T00:00:22;needs-based Bedfordshire;Vermont Trail protocol

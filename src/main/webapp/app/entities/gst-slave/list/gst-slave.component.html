@@ -1,0 +1,95 @@
+<div>
+  <h2 id="page-heading" data-cy="GstSlaveHeading">
+    <span>Gst Slaves</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-gst-slave"
+        [routerLink]="['/gst-slave/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Gst Slave </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="gstSlaves?.length === 0">
+    <span>No Gst Slaves found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="gstSlaves && gstSlaves.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="gstSlaveId">
+            <div class="d-flex">
+              <span>Gst Slave Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tax">
+            <div class="d-flex">
+              <span>Tax</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="taxPercentage">
+            <div class="d-flex">
+              <span>Tax Percentage</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gstSlave of gstSlaves; trackBy: trackGstSlaveId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/gst-slave', gstSlave.gstSlaveId, 'view']">{{ gstSlave.gstSlaveId }}</a>
+          </td>
+          <td>{{ gstSlave.tax }}</td>
+          <td>{{ gstSlave.taxPercentage }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/gst-slave', gstSlave.gstSlaveId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/gst-slave', gstSlave.gstSlaveId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(gstSlave)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

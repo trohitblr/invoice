@@ -1,0 +1,71 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062401",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "retailer_user",
+  "fields": [
+    {
+      "fieldName": "retailerUserId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "UserType",
+      "fieldValues": "OWNER (owner),ADMIN (admin),BILLING (billing),AGENT (agent)"
+    },
+    {
+      "fieldName": "encPassword",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "RetailerUser",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "retailer",
+      "otherEntityRelationshipName": "retailerUser",
+      "relationshipName": "retailers",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

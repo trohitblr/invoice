@@ -1,0 +1,76 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062359",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "customer",
+  "fields": [
+    {
+      "fieldName": "customerId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^(.+)@(\\\\S+)$"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "10",
+      "fieldValidateRulesMin": "10"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Customer",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "address",
+      "ownerSide": true,
+      "relationshipName": "invoiceAddress",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "address",
+      "ownerSide": true,
+      "relationshipName": "billingAddress",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "retailer",
+      "otherEntityRelationshipName": "customers",
+      "ownerSide": false,
+      "relationshipName": "retailers",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,155 @@
+<div>
+  <h2 id="page-heading" data-cy="InvoiceLineItemHeading">
+    <span>Invoice Line Items</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-invoice-line-item"
+        [routerLink]="['/invoice-line-item/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Invoice Line Item </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="invoiceLineItems?.length === 0">
+    <span>No Invoice Line Items found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="invoiceLineItems && invoiceLineItems.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="invoiceLineItemId">
+            <div class="d-flex">
+              <span>Invoice Line Item Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="articleType">
+            <div class="d-flex">
+              <span>Article Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="articleId">
+            <div class="d-flex">
+              <span>Article Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="quantity">
+            <div class="d-flex">
+              <span>Quantity</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="amount">
+            <div class="d-flex">
+              <span>Amount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="discount">
+            <div class="d-flex">
+              <span>Discount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdOn">
+            <div class="d-flex">
+              <span>Created On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedOn">
+            <div class="d-flex">
+              <span>Updated On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <div class="d-flex">
+              <span>Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedBy">
+            <div class="d-flex">
+              <span>Updated By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="invoices.invoiceId">
+            <div class="d-flex">
+              <span>Invoices</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoiceLineItem of invoiceLineItems; trackBy: trackInvoiceLineItemId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/invoice-line-item', invoiceLineItem.invoiceLineItemId, 'view']">{{ invoiceLineItem.invoiceLineItemId }}</a>
+          </td>
+          <td>{{ invoiceLineItem.articleType }}</td>
+          <td>{{ invoiceLineItem.articleId }}</td>
+          <td>{{ invoiceLineItem.quantity }}</td>
+          <td>{{ invoiceLineItem.amount }}</td>
+          <td>{{ invoiceLineItem.discount }}</td>
+          <td>{{ invoiceLineItem.createdOn | formatMediumDatetime }}</td>
+          <td>{{ invoiceLineItem.updatedOn | formatMediumDatetime }}</td>
+          <td>{{ invoiceLineItem.createdBy }}</td>
+          <td>{{ invoiceLineItem.updatedBy }}</td>
+          <td>
+            <div *ngIf="invoiceLineItem.invoices">
+              <a [routerLink]="['/invoice', invoiceLineItem.invoices.invoiceId, 'view']">{{ invoiceLineItem.invoices.invoiceId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/invoice-line-item', invoiceLineItem.invoiceLineItemId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/invoice-line-item', invoiceLineItem.invoiceLineItemId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(invoiceLineItem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062403",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "invoice_g_st_line_item",
+  "fields": [
+    {
+      "fieldName": "invoiceGStLineItemId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "articleType",
+      "fieldType": "ArticleType",
+      "fieldValues": "GNG (gng),AIR (air)"
+    },
+    {
+      "fieldName": "articleId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "hsnsac",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sgst",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "cgst",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "sgstTaxAmount",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "cgstTaxAmount",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "InvoiceGStLineItem",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "invoice",
+      "otherEntityRelationshipName": "invoiceGStLineItem",
+      "relationshipName": "invoices",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

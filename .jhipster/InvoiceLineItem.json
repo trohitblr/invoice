@@ -1,0 +1,67 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062402",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "invoice_line_item",
+  "fields": [
+    {
+      "fieldName": "invoiceLineItemId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "articleType",
+      "fieldType": "ArticleType",
+      "fieldValues": "GNG (gng),AIR (air)"
+    },
+    {
+      "fieldName": "articleId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "InvoiceLineItem",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "invoice",
+      "otherEntityRelationshipName": "invoiceLineItem",
+      "relationshipName": "invoices",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

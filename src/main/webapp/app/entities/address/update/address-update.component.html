@@ -1,0 +1,165 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-address-heading" data-cy="AddressCreateUpdateHeading">Create or edit a Address</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_line1">Line 1</label>
+          <input type="text" class="form-control" name="line1" id="field_line1" data-cy="line1" formControlName="line1" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_line2">Line 2</label>
+          <input type="text" class="form-control" name="line2" id="field_line2" data-cy="line2" formControlName="line2" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_city">City</label>
+          <input type="text" class="form-control" name="city" id="field_city" data-cy="city" formControlName="city" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_state">State</label>
+          <input type="text" class="form-control" name="state" id="field_state" data-cy="state" formControlName="state" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_pincode">Pincode</label>
+          <input type="number" class="form-control" name="pincode" id="field_pincode" data-cy="pincode" formControlName="pincode" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_lat">Lat</label>
+          <input type="number" class="form-control" name="lat" id="field_lat" data-cy="lat" formControlName="lat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_lon">Lon</label>
+          <input type="number" class="form-control" name="lon" id="field_lon" data-cy="lon" formControlName="lon" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_country">Country</label>
+          <input type="text" class="form-control" name="country" id="field_country" data-cy="country" formControlName="country" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_landmark">Landmark</label>
+          <input type="text" class="form-control" name="landmark" id="field_landmark" data-cy="landmark" formControlName="landmark" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_shippingAddress">Shipping Address</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="shippingAddress"
+            id="field_shippingAddress"
+            data-cy="shippingAddress"
+            formControlName="shippingAddress"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_billingAddress">Billing Address</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="billingAddress"
+            id="field_billingAddress"
+            data-cy="billingAddress"
+            formControlName="billingAddress"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_homeAddress">Home Address</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="homeAddress"
+            id="field_homeAddress"
+            data-cy="homeAddress"
+            formControlName="homeAddress"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_officeAddress">Office Address</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="officeAddress"
+            id="field_officeAddress"
+            data-cy="officeAddress"
+            formControlName="officeAddress"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_createdOn">Created On</label>
+          <div class="d-flex">
+            <input
+              id="field_createdOn"
+              data-cy="createdOn"
+              type="datetime-local"
+              class="form-control"
+              name="createdOn"
+              formControlName="createdOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_updatedOn">Updated On</label>
+          <div class="d-flex">
+            <input
+              id="field_updatedOn"
+              data-cy="updatedOn"
+              type="datetime-local"
+              class="form-control"
+              name="updatedOn"
+              formControlName="updatedOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_updatedBy">Updated By</label>
+          <input type="text" class="form-control" name="updatedBy" id="field_updatedBy" data-cy="updatedBy" formControlName="updatedBy" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

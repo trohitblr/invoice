@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="invoiceGStLineItem">
+      <h2 data-cy="invoiceGStLineItemDetailsHeading"><span>Invoice G St Line Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Invoice G St Line Item Id</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.invoiceGStLineItemId }}</span>
+        </dd>
+        <dt><span>Article Type</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.articleType }}</span>
+        </dd>
+        <dt><span>Article Id</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.articleId }}</span>
+        </dd>
+        <dt><span>Hsnsac</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.hsnsac }}</span>
+        </dd>
+        <dt><span>Sgst</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.sgst }}</span>
+        </dd>
+        <dt><span>Cgst</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.cgst }}</span>
+        </dd>
+        <dt><span>Sgst Tax Amount</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.sgstTaxAmount }}</span>
+        </dd>
+        <dt><span>Cgst Tax Amount</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.cgstTaxAmount }}</span>
+        </dd>
+        <dt><span>Amount</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.amount }}</span>
+        </dd>
+        <dt><span>Discount</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.discount }}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated On</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.createdBy }}</span>
+        </dd>
+        <dt><span>Updated By</span></dt>
+        <dd>
+          <span>{{ invoiceGStLineItem.updatedBy }}</span>
+        </dd>
+        <dt><span>Invoices</span></dt>
+        <dd>
+          <div *ngIf="invoiceGStLineItem.invoices">
+            <a [routerLink]="['/invoice', invoiceGStLineItem.invoices.invoiceId, 'view']">{{ invoiceGStLineItem.invoices.invoiceId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/invoice-g-st-line-item', invoiceGStLineItem.invoiceGStLineItemId, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="retailer">
+      <h2 data-cy="retailerDetailsHeading"><span>Retailer</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Retailer Id</span></dt>
+        <dd>
+          <span>{{ retailer.retailerId }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ retailer.name }}</span>
+        </dd>
+        <dt><span>Owner</span></dt>
+        <dd>
+          <span>{{ retailer.owner }}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+          <span>{{ retailer.phone }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ retailer.email }}</span>
+        </dd>
+        <dt><span>Gst Number</span></dt>
+        <dd>
+          <span>{{ retailer.gstNumber }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ retailer.status }}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+          <span>{{ retailer.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated On</span></dt>
+        <dd>
+          <span>{{ retailer.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ retailer.createdBy }}</span>
+        </dd>
+        <dt><span>Updated By</span></dt>
+        <dd>
+          <span>{{ retailer.updatedBy }}</span>
+        </dd>
+        <dt><span>Invoice Address</span></dt>
+        <dd>
+          <div *ngIf="retailer.invoiceAddress">
+            <a [routerLink]="['/address', retailer.invoiceAddress.id, 'view']">{{ retailer.invoiceAddress.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Billing Address</span></dt>
+        <dd>
+          <div *ngIf="retailer.billingAddress">
+            <a [routerLink]="['/address', retailer.billingAddress.id, 'view']">{{ retailer.billingAddress.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Logo</span></dt>
+        <dd>
+          <div *ngIf="retailer.logo">
+            <a [routerLink]="['/media', retailer.logo.mediaId, 'view']">{{ retailer.logo.mediaId }}</a>
+          </div>
+        </dd>
+        <dt><span>Customers</span></dt>
+        <dd>
+          <span *ngFor="let customers of retailer.customers; let last = last">
+            <a [routerLink]="['/customer', customers.customerId, 'view']">{{ customers.customerId }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/retailer', retailer.retailerId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

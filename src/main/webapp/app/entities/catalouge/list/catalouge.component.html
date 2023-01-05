@@ -1,0 +1,173 @@
+<div>
+  <h2 id="page-heading" data-cy="CatalougeHeading">
+    <span>Catalouges</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-catalouge"
+        [routerLink]="['/catalouge/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Catalouge </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="catalouges?.length === 0">
+    <span>No Catalouges found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="catalouges && catalouges.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="catalougeId">
+            <div class="d-flex">
+              <span>Catalouge Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span>Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cost">
+            <div class="d-flex">
+              <span>Cost</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span>Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span>Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="hsnNo">
+            <div class="d-flex">
+              <span>Hsn No</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="quantity">
+            <div class="d-flex">
+              <span>Quantity</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdOn">
+            <div class="d-flex">
+              <span>Created On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedOn">
+            <div class="d-flex">
+              <span>Updated On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <div class="d-flex">
+              <span>Created By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedBy">
+            <div class="d-flex">
+              <span>Updated By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="categorie.categoryId">
+            <div class="d-flex">
+              <span>Categorie</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="taxSlaves.gstSlaveId">
+            <div class="d-flex">
+              <span>Tax Slaves</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let catalouge of catalouges; trackBy: trackCatalougeId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/catalouge', catalouge.catalougeId, 'view']">{{ catalouge.catalougeId }}</a>
+          </td>
+          <td>{{ catalouge.name }}</td>
+          <td>{{ catalouge.cost }}</td>
+          <td>{{ catalouge.status }}</td>
+          <td>{{ catalouge.description }}</td>
+          <td>{{ catalouge.hsnNo }}</td>
+          <td>{{ catalouge.quantity }}</td>
+          <td>{{ catalouge.createdOn | formatMediumDatetime }}</td>
+          <td>{{ catalouge.updatedOn | formatMediumDatetime }}</td>
+          <td>{{ catalouge.createdBy }}</td>
+          <td>{{ catalouge.updatedBy }}</td>
+          <td>
+            <div *ngIf="catalouge.categorie">
+              <a [routerLink]="['/categories', catalouge.categorie.categoryId, 'view']">{{ catalouge.categorie.categoryId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="catalouge.taxSlaves">
+              <a [routerLink]="['/gst-slave', catalouge.taxSlaves.gstSlaveId, 'view']">{{ catalouge.taxSlaves.gstSlaveId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/catalouge', catalouge.catalougeId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/catalouge', catalouge.catalougeId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(catalouge)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

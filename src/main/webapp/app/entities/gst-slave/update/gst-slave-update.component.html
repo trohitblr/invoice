@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-gst-slave-heading" data-cy="GstSlaveCreateUpdateHeading">Create or edit a Gst Slave</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.gstSlaveId.value !== null">
+          <label class="form-label" for="field_gstSlaveId">Gst Slave Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="gstSlaveId"
+            id="field_gstSlaveId"
+            data-cy="gstSlaveId"
+            formControlName="gstSlaveId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_tax">Tax</label>
+          <select class="form-control" name="tax" formControlName="tax" id="field_tax" data-cy="tax">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let gstType of gstTypeValues" [value]="gstType">gstType</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_taxPercentage">Tax Percentage</label>
+          <input
+            type="number"
+            class="form-control"
+            name="taxPercentage"
+            id="field_taxPercentage"
+            data-cy="taxPercentage"
+            formControlName="taxPercentage"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20230103062358",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "media",
+  "fields": [
+    {
+      "fieldName": "mediaId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "path",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "MediaType",
+      "fieldValues": "PNG (png),JEPG (jpeg)"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Media",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}
